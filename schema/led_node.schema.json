@@ -1,0 +1,90 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://lumen-atlas/schema/led_node.schema.json",
+  "title": "LED Node",
+  "description": "Schema describing a single addressable LED node within an atlas graph.",
+  "type": "object",
+  "required": ["id", "chunk_id", "index_in_chunk", "atlas_uv", "neighbors"],
+  "properties": {
+    "id": {
+      "type": "integer",
+      "minimum": 0,
+      "description": "Global node identifier within the atlas."
+    },
+    "chunk_id": {
+      "type": "string",
+      "description": "Identifier for the wiring chunk / strip segment the node belongs to."
+    },
+    "index_in_chunk": {
+      "type": "integer",
+      "minimum": 0,
+      "description": "Index of the node within its wiring chunk, used for debugging wiring continuity."
+    },
+    "region": {
+      "type": "string",
+      "description": "Semantic region name assigned by a human (e.g. hood_peak, lapel_left)."
+    },
+    "atlas_uv": {
+      "type": "object",
+      "description": "Stable 2D parameterization for indexing and navigation.",
+      "required": ["u", "v"],
+      "properties": {
+        "u": {"type": "number"},
+        "v": {"type": "number"}
+      },
+      "additionalProperties": false
+    },
+    "neighbors": {
+      "type": "object",
+      "description": "Neighboring node ids grouped by edge set.",
+      "properties": {
+        "strip": {
+          "type": "array",
+          "items": {"type": "integer", "minimum": 0},
+          "description": "Adjacency in wiring order (direct electrical neighbors)."
+        },
+        "surface": {
+          "type": "array",
+          "items": {"type": "integer", "minimum": 0},
+          "description": "Perceptual or geodesic proximity on the physical surface."
+        },
+        "region": {
+          "type": "array",
+          "items": {"type": "integer", "minimum": 0},
+          "description": "Semantic or manual groupings beyond wiring / surface adjacency."
+        }
+      },
+      "additionalProperties": false
+    },
+    "tags": {
+      "type": "array",
+      "description": "Freeform labels for search and navigation.",
+      "items": {"type": "string"}
+    },
+    "description": {
+      "type": "string",
+      "description": "Human-readable notes about the node (placement, visibility, etc.)."
+    },
+    "confidence": {
+      "type": "number",
+      "minimum": 0.0,
+      "maximum": 1.0,
+      "description": "Confidence score for the node placement or region attribution."
+    },
+    "camera_observations": {
+      "type": "array",
+      "description": "Raw camera detections that informed this node's placement.",
+      "items": {
+        "type": "object",
+        "required": ["camera_id", "x", "y"],
+        "properties": {
+          "camera_id": {"type": "string"},
+          "x": {"type": "number"},
+          "y": {"type": "number"}
+        },
+        "additionalProperties": false
+      }
+    }
+  },
+  "additionalProperties": false
+}

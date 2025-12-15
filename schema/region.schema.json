@@ -1,0 +1,29 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://lumen-atlas/schema/region.schema.json",
+  "title": "Region",
+  "description": "Semantic region grouping one or more LED nodes.",
+  "type": "object",
+  "required": ["name"],
+  "properties": {
+    "name": {
+      "type": "string",
+      "description": "Human-readable region name (e.g. hood_peak, cuff_right)."
+    },
+    "description": {
+      "type": "string",
+      "description": "Notes about the region's meaning or physical placement."
+    },
+    "adjacent_regions": {
+      "type": "array",
+      "description": "Neighboring regions that should be considered adjacent for traversal.",
+      "items": {"type": "string"}
+    },
+    "tags": {
+      "type": "array",
+      "description": "Freeform labels for search and effect targeting.",
+      "items": {"type": "string"}
+    }
+  },
+  "additionalProperties": false
+}
