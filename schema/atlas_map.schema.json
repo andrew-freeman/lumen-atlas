@@ -1,0 +1,42 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://lumen-atlas/schema/atlas_map.schema.json",
+  "title": "Atlas Map",
+  "description": "Top-level atlas file describing nodes, regions, and metadata.",
+  "type": "object",
+  "required": ["meta", "regions", "nodes"],
+  "properties": {
+    "meta": {
+      "type": "object",
+      "description": "Metadata for the atlas file.",
+      "required": ["name", "version", "created"],
+      "properties": {
+        "name": {"type": "string"},
+        "version": {"type": "string"},
+        "created": {
+          "type": "string",
+          "description": "Creation timestamp or ISO8601 datetime string."
+        },
+        "notes": {"type": "string"}
+      },
+      "additionalProperties": false
+    },
+    "regions": {
+      "type": "array",
+      "items": {"$ref": "#/$defs/region"}
+    },
+    "nodes": {
+      "type": "array",
+      "items": {"$ref": "#/$defs/led_node"}
+    }
+  },
+  "$defs": {
+    "region": {
+      "$ref": "https://lumen-atlas/schema/region.schema.json"
+    },
+    "led_node": {
+      "$ref": "https://lumen-atlas/schema/led_node.schema.json"
+    }
+  },
+  "additionalProperties": false
+}

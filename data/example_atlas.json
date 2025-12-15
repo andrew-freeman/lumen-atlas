@@ -1,0 +1,75 @@
+{
+  "meta": {
+    "name": "demo_coat_v0",
+    "version": "0.1.0",
+    "created": "2024-04-01T12:00:00Z",
+    "notes": "Seed atlas for a three-node demo strip on a fur patch."
+  },
+  "regions": [
+    {
+      "name": "hood_peak",
+      "description": "Front-most point of the hood, dominant in camera view.",
+      "adjacent_regions": ["hood_left", "hood_right"],
+      "tags": ["anchor", "high_visibility"]
+    },
+    {
+      "name": "hood_left",
+      "description": "Left edge of the hood rim.",
+      "adjacent_regions": ["hood_peak"],
+      "tags": ["rim"]
+    }
+  ],
+  "nodes": [
+    {
+      "id": 0,
+      "chunk_id": "strip_a",
+      "index_in_chunk": 0,
+      "region": "hood_peak",
+      "atlas_uv": {"u": 0.5, "v": 0.1},
+      "neighbors": {
+        "strip": [1],
+        "surface": [1, 2]
+      },
+      "tags": ["calibration", "anchor"],
+      "description": "Brightest LED for initial camera lock-on.",
+      "confidence": 0.9,
+      "camera_observations": [
+        {"camera_id": "dolly_front", "x": 512.2, "y": 218.7}
+      ]
+    },
+    {
+      "id": 1,
+      "chunk_id": "strip_a",
+      "index_in_chunk": 1,
+      "region": "hood_peak",
+      "atlas_uv": {"u": 0.53, "v": 0.12},
+      "neighbors": {
+        "strip": [0, 2],
+        "surface": [0, 2]
+      },
+      "tags": ["bridge"],
+      "description": "Connects hood peak to left rim; moderate confidence.",
+      "confidence": 0.72,
+      "camera_observations": [
+        {"camera_id": "dolly_front", "x": 534.1, "y": 235.0}
+      ]
+    },
+    {
+      "id": 2,
+      "chunk_id": "strip_a",
+      "index_in_chunk": 2,
+      "region": "hood_left",
+      "atlas_uv": {"u": 0.56, "v": 0.18},
+      "neighbors": {
+        "strip": [1],
+        "surface": [0, 1]
+      },
+      "tags": ["rim", "shadow_risk"],
+      "description": "Sits under fur ridge; harder to see without fill light.",
+      "confidence": 0.64,
+      "camera_observations": [
+        {"camera_id": "dolly_front", "x": 556.9, "y": 256.3}
+      ]
+    }
+  ]
+}
