@@ -63,3 +63,17 @@ lumen-atlas is designed to be hardware-agnostic, human-readable, and iteratively
 - Keep data human-readable and semantic-rich to support iterative mapping.
 - Keep hardware control separate from core representation logic.
 
+
+## 
+
+*Init*
+cd ~/opencv_project
+python3 -m venv venv
+pip install fastapi uvicorn opencv-python numpy
+sudo apt install uvicorn
+
+*Start/Restart* 
+cd ~/opencv_project
+source venv/bin/activate
+source .venv/bin/activate
+uvicorn app:app --host 0.0.0.0 --port 8000
